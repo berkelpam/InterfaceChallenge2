@@ -35,13 +35,43 @@ public class Main {
         eventsForPirate.add("Drink Rum.");
 
         ArrayList<String> eventsForPaladin = new ArrayList<String>();
+        ArrayList<Monster> monsters = new ArrayList<Monster>();
+        ArrayList<Player> players = new ArrayList<Player>();
 
 
         Player player = new Player("Jake", "Pirate");
+        players.add(player);
+        Player secondPlayer=new Player("Frosty","Snowman");
+        players.add(secondPlayer);
+
         player.saveToList("Pirate is created.");
         player.showEventList();
         player.populateObject(eventsForPirate);
         player.showEventList();
+
+        Monster Troll = new Monster("Cave Troll 1","Chaotic-Evil");
+        Monster caveTroll = new Monster("Cave Troll 2","Chaotic-Evil");
+        Monster woodTroll = new Monster("Wood Troll 1","Chaotic-Evil");
+        Monster mountainTroll = new Monster("Mountain Troll 1","Chaotic-Evil");
+        Troll.saveToList(Troll.getName() + " created.");
+        caveTroll.saveToList(caveTroll.getName() + " created.");
+        woodTroll.saveToList(woodTroll.getName() + " created.");
+        mountainTroll.saveToList(mountainTroll.getName() + " created.");
+        Troll.showEventList();
+        caveTroll.showEventList();
+        woodTroll.showEventList();
+        mountainTroll.showEventList();
+
+        monsters.add(Troll);
+        monsters.add(caveTroll);
+        monsters.add(mountainTroll);
+        System.out.println("---Monsters--------");
+        for (Monster monster:monsters){
+
+            System.out.println(monster.toString());
+        }
+
+
 
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;

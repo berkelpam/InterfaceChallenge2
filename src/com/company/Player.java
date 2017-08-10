@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by pauljava on 10/08/2017.
  */
-public class Player implements IStorageMedium {
+public class Player implements IStorageMedium,ICharacter {
     private String name;
     private int healtPoints;
     private String classType;
@@ -33,7 +33,7 @@ public class Player implements IStorageMedium {
             this.events.add(events.get(i));
         }
     }
-
+    @Override
     public void loseHealth(int hitPoints) {
         if (hitPoints >= this.healtPoints) {
             this.healtPoints -= hitPoints;
