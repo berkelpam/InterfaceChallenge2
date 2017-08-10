@@ -1,5 +1,8 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     // Challenge:
     // Create a simple interface that allows an object to be saved to some sort of storage medium.
@@ -23,6 +26,55 @@ public class Main {
 
 
     public static void main(String[] args) {
-	// write your code here here here
+
+        ArrayList<String> eventsForPirate = new ArrayList<String>();
+
+        eventsForPirate.add("Be born.");
+        eventsForPirate.add("Grow up.");
+        eventsForPirate.add("Hijack first ship");
+        eventsForPirate.add("Drink Rum.");
+
+        ArrayList<String> eventsForPaladin = new ArrayList<String>();
+
+
+        Player player = new Player("Jake", "Pirate");
+        player.saveToList("Pirate is created.");
+        player.showEventList();
+        player.populateObject(eventsForPirate);
+        player.showEventList();
+
+        Scanner scanner = new Scanner(System.in);
+        boolean quit = false;
+
+        while (!quit) {
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+
+                case 0:
+                    quit = true;
+                    break;
+
+                case 1:
+
+                    System.out.println("Enter a new event for Pirate:");
+                    String event = scanner.next();
+                    eventsForPirate.add(event);
+                    System.out.println(event+" added for Pirate");
+                    scanner.nextLine();
+                    break;
+
+                case 9:
+                    for (int i = 0; i <eventsForPirate.size() ; i++) {
+                        System.out.println(eventsForPirate.get(i).toString());
+
+                    }
+            }
+
+
+        }
+
+
     }
 }
