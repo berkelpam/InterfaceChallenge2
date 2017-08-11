@@ -118,6 +118,12 @@ public class Main {
 
         ISaveable Troll= new Monster("Troll","Chaotic");
         System.out.println(Troll.toString());
+
+        //As we impmented the troll as Isaveable it still is a monster class
+        //A little workaround is needed to get to the getType and other methods.
+        System.out.println("Strength "+((Monster)Troll).getType());
+
+        );
     }
 
     public static void saveObject(ISaveable objectToSave){
