@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -27,84 +28,136 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<String> eventsForPirate = new ArrayList<String>();
+//        ArrayList<String> eventsForPirate = new ArrayList<String>();
+//
+//        eventsForPirate.add("Be born.");
+//        eventsForPirate.add("Grow up.");
+//        eventsForPirate.add("Hijack first ship");
+//        eventsForPirate.add("Drink Rum.");
+//
+//        ArrayList<String> eventsForPaladin = new ArrayList<String>();
+//        ArrayList<Monster> monsters = new ArrayList<Monster>();
+//        ArrayList<Player> players = new ArrayList<Player>();
+//
+//
+//        Player player = new Player("Jake", "Pirate");
+//        players.add(player);
+//        Player secondPlayer=new Player("Frosty","Snowman");
+//        players.add(secondPlayer);
+//
+//        player.saveToList("Pirate is created.");
+//        player.showEventList();
+//        player.populateObject(eventsForPirate);
+//        player.showEventList();
+//
+//        Monster Troll = new Monster("Cave Troll 1","Chaotic-Evil");
+//        Monster caveTroll = new Monster("Cave Troll 2","Chaotic-Evil");
+//        Monster woodTroll = new Monster("Wood Troll 1","Chaotic-Evil");
+//        Monster mountainTroll = new Monster("Mountain Troll 1","Chaotic-Evil");
+//        Troll.saveToList(Troll.getName() + " created.");
+//        caveTroll.saveToList(caveTroll.getName() + " created.");
+//        woodTroll.saveToList(woodTroll.getName() + " created.");
+//        mountainTroll.saveToList(mountainTroll.getName() + " created.");
+//        Troll.showEventList();
+//        caveTroll.showEventList();
+//        woodTroll.showEventList();
+//        mountainTroll.showEventList();
+//
+//        monsters.add(Troll);
+//        monsters.add(caveTroll);
+//        monsters.add(mountainTroll);
+//        System.out.println("---Monsters--------");
+//        for (Monster monster:monsters){
+//
+//            System.out.println(monster.toString());
+//        }
+//
+//
+//
+//        Scanner scanner = new Scanner(System.in);
+//        boolean quit = false;
+//
+//        while (!quit) {
+//
+//            int option = scanner.nextInt();
+//
+//            switch (option) {
+//
+//                case 0:
+//                    quit = true;
+//                    break;
+//
+//                case 1:
+//
+//                    System.out.println("Enter a new event for Pirate:");
+//                    String event = scanner.next();
+//                    eventsForPirate.add(event);
+//                    System.out.println(event+" added for Pirate");
+//                    scanner.nextLine();
+//                    break;
+//
+//                case 9:
+//                    for (int i = 0; i <eventsForPirate.size() ; i++) {
+//                        System.out.println(eventsForPirate.get(i).toString());
+//
+//                    }
+//            }
+//
+//
+//        }
 
-        eventsForPirate.add("Be born.");
-        eventsForPirate.add("Grow up.");
-        eventsForPirate.add("Hijack first ship");
-        eventsForPirate.add("Drink Rum.");
+        Player tim = new Player("Time","Paladin");
+        System.out.println(tim.toString());
+        saveObject(tim);
 
-        ArrayList<String> eventsForPaladin = new ArrayList<String>();
-        ArrayList<Monster> monsters = new ArrayList<Monster>();
-        ArrayList<Player> players = new ArrayList<Player>();
+        tim.setHealtPoints(120);
+        System.out.println(tim.toString());
 
+       // loadObject(tim);
+       // System.out.println(tim.toString());
 
-        Player player = new Player("Jake", "Pirate");
-        players.add(player);
-        Player secondPlayer=new Player("Frosty","Snowman");
-        players.add(secondPlayer);
+        ISaveable Troll= new Monster("Troll","Chaotic");
+        System.out.println(Troll.toString());
+    }
 
-        player.saveToList("Pirate is created.");
-        player.showEventList();
-        player.populateObject(eventsForPirate);
-        player.showEventList();
-
-        Monster Troll = new Monster("Cave Troll 1","Chaotic-Evil");
-        Monster caveTroll = new Monster("Cave Troll 2","Chaotic-Evil");
-        Monster woodTroll = new Monster("Wood Troll 1","Chaotic-Evil");
-        Monster mountainTroll = new Monster("Mountain Troll 1","Chaotic-Evil");
-        Troll.saveToList(Troll.getName() + " created.");
-        caveTroll.saveToList(caveTroll.getName() + " created.");
-        woodTroll.saveToList(woodTroll.getName() + " created.");
-        mountainTroll.saveToList(mountainTroll.getName() + " created.");
-        Troll.showEventList();
-        caveTroll.showEventList();
-        woodTroll.showEventList();
-        mountainTroll.showEventList();
-
-        monsters.add(Troll);
-        monsters.add(caveTroll);
-        monsters.add(mountainTroll);
-        System.out.println("---Monsters--------");
-        for (Monster monster:monsters){
-
-            System.out.println(monster.toString());
+    public static void saveObject(ISaveable objectToSave){
+        for (int i = 0; i <objectToSave.write().size() ; i++) {
+            System.out.println("Saving "+objectToSave.write().get(i)+" to storage device.");
         }
+    }
 
+    public static void loadObject(ISaveable objectToLoad){
+        List<String> values=readValues();
+        objectToLoad.read(values);
+    }
 
+    public static ArrayList<String>readValues(){
+        ArrayList<String> values = new ArrayList<String>();
 
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
+        int index=0;
+        System.out.println("1 to enter string 0 to quit");
 
-        while (!quit) {
+        while (!quit){
+            System.out.println("Choose an option:");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-            int option = scanner.nextInt();
 
-            switch (option) {
-
+            switch(choice){
                 case 0:
-                    quit = true;
+                    quit=true;
                     break;
-
                 case 1:
-
-                    System.out.println("Enter a new event for Pirate:");
-                    String event = scanner.next();
-                    eventsForPirate.add(event);
-                    System.out.println(event+" added for Pirate");
-                    scanner.nextLine();
+                    System.out.println("Enter a string;");
+                    String StringInput =scanner.nextLine();
+                    values.add(index,StringInput);
+                    index++;
                     break;
-
-                case 9:
-                    for (int i = 0; i <eventsForPirate.size() ; i++) {
-                        System.out.println(eventsForPirate.get(i).toString());
-
-                    }
             }
-
-
         }
-
+        return values;
 
     }
 }

@@ -1,25 +1,29 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pauljava on 10/08/2017.
  */
-public class Monster implements IStorageMedium, ICharacter {
+public class Monster implements IStorageMedium, ICharacter, ISaveable {
 
     private String name;
     private String type;
     private int health;
     private boolean alive;
+    private ArrayList<String> events;
+    private ArrayList<String> items;
 
     public Monster(String name, String type) {
         this.name = name;
         this.type = type;
-        this.health=100;
-        this.alive=true;
+        this.health = 100;
+        this.alive = true;
+        this.events = new ArrayList<String>();
+        this.items = new ArrayList<String>();
     }
 
-    private ArrayList<String> events = new ArrayList<String>();
 
     @Override
     public ArrayList<String> saveToList(String values) {
@@ -45,11 +49,12 @@ public class Monster implements IStorageMedium, ICharacter {
             System.out.println("Monster takes a hit of " + hitPoints + " points and died.");
         }
     }
-    public void showEventList(){
-        System.out.println("Event list for monster: "+ this.name);
+
+    public void showEventList() {
+        System.out.println("Event list for monster: " + this.name);
         System.out.println("----------------------------------");
-        for (int i = 0; i <events.size() ; i++) {
-            System.out.println(i+1+". "+events.get(i).toString());
+        for (int i = 0; i < events.size(); i++) {
+            System.out.println(i + 1 + ". " + events.get(i).toString());
         }
         System.out.println("===================================");
 
@@ -57,7 +62,12 @@ public class Monster implements IStorageMedium, ICharacter {
 
     @Override
     public String toString() {
-        return this.name + " -=> "+this.type;
+        return "Monster{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", health=" + health +
+                ", alive=" + alive +
+                '}';
     }
 
     public String getName() {
@@ -66,5 +76,35 @@ public class Monster implements IStorageMedium, ICharacter {
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public void saveItems(ArrayList<String> items) {
+        //TODO implement this.
+    }
+
+    @Override
+    public List<String> write() {
+        List<String> values = new ArrayList<String>();
+        values.add(0, this.name);
+        values.add(1, "" + this.health);
+        values.add(2, this.type);
+        values.add(3, "" + this.alive);
+        return values;
+    }
+
+    @Override
+    public void read(List<String> savedValues) {
+        if ((savedValues != null) && (savedValues.size() > 0)) {
+            this.name = savedValues.get(0);
+            this.health = Integer.parseInt(savedValues.get(1));
+            this.type = savedValues.get(2);
+            if (savedValues.get(3).equals("true")) {
+                this.alive = true;
+            } else {
+                this.alive = false;
+            }
+
+        }
     }
 }

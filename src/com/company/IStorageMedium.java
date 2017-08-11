@@ -9,4 +9,5 @@ public interface IStorageMedium {
 
      ArrayList<String> saveToList(String values);
     void populateObject(ArrayList<String> events);
+    void saveItems(ArrayList<String> items);
 }
